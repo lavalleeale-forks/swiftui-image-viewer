@@ -4,12 +4,12 @@ import URLImage
 import Combine
 
 @available(iOS 13.0, *)
-public struct ImageViewerRemote: View {
+public struct ImageViewerRemote<label: View>: View {
     @Binding var viewerShown: Bool
     @Binding var imageURL: String
     @State var httpHeaders: [String: String]?
     @State var disableCache: Bool?
-    @State var caption: Text?
+    @State var caption: label?
     @State var closeButtonTopRight: Bool?
     
     var aspectRatio: Binding<CGFloat>?
@@ -19,7 +19,7 @@ public struct ImageViewerRemote: View {
     
     @ObservedObject var loader: ImageLoader
     
-    public init(imageURL: Binding<String>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, disableCache: Bool? = nil, caption: Text? = nil, closeButtonTopRight: Bool? = false) {
+    public init(imageURL: Binding<String>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, disableCache: Bool? = nil, caption: label? = nil, closeButtonTopRight: Bool? = false) {
         _imageURL = imageURL
         _viewerShown = viewerShown
         _disableCache = State(initialValue: disableCache)

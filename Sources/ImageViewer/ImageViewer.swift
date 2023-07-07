@@ -2,11 +2,11 @@ import SwiftUI
 import UIKit
 
 @available(iOS 13.0, *)
-public struct ImageViewer: View {
+public struct ImageViewer<label: View>: View {
     @Binding var viewerShown: Bool
     @Binding var image: Image
     @Binding var imageOpt: Image?
-    @State var caption: Text?
+    @State var caption: label?
     @State var closeButtonTopRight: Bool?
     
     var aspectRatio: Binding<CGFloat>?
@@ -14,7 +14,7 @@ public struct ImageViewer: View {
     @State var dragOffset: CGSize = CGSize.zero
     @State var dragOffsetPredicted: CGSize = CGSize.zero
     
-    public init(image: Binding<Image>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, caption: Text? = nil, closeButtonTopRight: Bool? = false) {
+    public init(image: Binding<Image>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, caption: label? = nil, closeButtonTopRight: Bool? = false) {
         _image = image
         _viewerShown = viewerShown
         _imageOpt = .constant(nil)
@@ -23,7 +23,7 @@ public struct ImageViewer: View {
         _closeButtonTopRight = State(initialValue: closeButtonTopRight)
     }
     
-    public init(image: Binding<Image?>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, caption: Text? = nil, closeButtonTopRight: Bool? = false) {
+    public init(image: Binding<Image?>, viewerShown: Binding<Bool>, aspectRatio: Binding<CGFloat>? = nil, caption: label? = nil, closeButtonTopRight: Bool? = false) {
         _image = .constant(Image(systemName: ""))
         _imageOpt = image
         _viewerShown = viewerShown
